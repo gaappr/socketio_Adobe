@@ -1,4 +1,6 @@
 .gitignore.swp
 .sass-cache
 .DS_Store
+
+#The Node modules directory - use NPM to install and configure the project
 node_modules
