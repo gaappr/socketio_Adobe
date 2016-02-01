@@ -1,0 +1,22 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: #225378;
+  font-family: "Helvetica", "Arial", sans-serif; }
+
+#wrapper {
+  background-color: #F3FFE2;
+  width: 960px;
+  border-radius: 25px;
+  margin: 0 auto;
+  margin-top: 25px;
+  padding: 25px; }
+
+.stepDiv img {
+  max-width: 150px; }
+
+#feedback {
+  border-top: 3px solid #EB7F00;
+  min-height: 100px; }
+
+/*# sourceMappingURL=style.css.map */
