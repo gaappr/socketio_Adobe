@@ -27,7 +27,7 @@ appBrowser.get('/socket.io.js', function(req,res){
 });
 
 appBrowser.get('/style.css', function(req,res){
-   res.sendFile(__dirname + '/style.css'); 
+   res.sendFile(__dirname + '/css/style.css'); 
 });
 
 appBrowser.get('/images/lesson1.png', function(req, res){
