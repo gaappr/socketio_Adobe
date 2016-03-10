@@ -19,7 +19,7 @@
                 document.getElementById('feedback').appendChild(endGame);
             });
         
-        socket.on('Bclick', function (data) {
+        socket.on('loginVerified', function (data) {
             theButton = document.createElement('button');
             theButton.appendChild(document.createTextNode('Begin Lesson 1') );
             theButton.onclick = function(){ startPolling() };
