@@ -1,5 +1,6 @@
 //Dealing with messages from Photoshop
-var loginVerifier = require('./js/login.js');
+var loginWranger = require('./js/loginwrangler.js');
+var events = require('./js/events.js');
 var appAdobe = require('express')();
 var serverAdobe = require('http').Server(appAdobe);
 var ioAdobe = require('socket.io')(serverAdobe);
@@ -38,12 +39,6 @@ appBrowser.get('/images/lesson1.png', function(req, res){
     res.sendFile(__dirname + '/images/lesson1.png');
 });
 
-/*************
-* Setting up the necessary routing for the adobe side of things
-**************/
-appAdobe.post('/formData', function(req,res){
-    console.log(req.body.username);
-});
 
 /***********
 * Working with the events to/from Adobe
@@ -51,23 +46,19 @@ appAdobe.post('/formData', function(req,res){
 ioAdobe.on('connection', function (socket) {
     console.log('Adobe Connection');
     adobeSocket = socket;
-    adobeSocket.emit('connect', { connection: 'adobe' });
-    adobeSocket.on('clicked', function (data) {
-        console.log("A button was clicked.");
-        browserSocket.emit('Bclick', {msg:'hello!'});
-    });
+    adobeSocket.emit(events.connect, { connection: 'adobe' });
     
     adobeSocket.on('modeChanged',
         function(data){
-            browserSocket.emit('pollForMode',{});
+            browserSocket.emit(events.pollForMode,{});
         });
 
     adobeSocket.on('loginAttempt',
         function(data) {
-            if(loginVerifier.checkLogin(data.username)){
+            if(loginWranger.checkLogin(data.username)){
                 console.log('username verified');
-                adobeSocket.emit('loginVerified');
-                browserSocket.emit('loginVerified');
+                adobeSocket.emit(events.loginVerified);
+                browserSocket.emit(events.loginVerified);
             }
             else{
                 console.log('login failed!');
@@ -81,9 +72,9 @@ ioAdobe.on('connection', function (socket) {
 ioBrowser.on('connection',function(socket){
     console.log('Browser Connection')
     browserSocket = socket;
-    browserSocket.emit('connect',{connection:'browser'});
+    browserSocket.emit(events.connect,{connection:'browser'});
     browserSocket.on('beginPoll',
         function(){
-            ioAdobe.emit('beginPoll',{});
+            ioAdobe.emit(events.beginPoll,{});
     });
 });
