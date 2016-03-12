@@ -1,4 +1,3 @@
-//Dealing with messages from Photoshop
 var loginWranger = require('./js/loginwrangler.js');
 var events = require('./js/events.js');
 var appAdobe = require('express')();
@@ -37,6 +36,10 @@ appBrowser.get('/style.css', function(req,res){
 
 appBrowser.get('/images/lesson1.png', function(req, res){
     res.sendFile(__dirname + '/images/lesson1.png');
+});
+
+appBrowser.get('/clientHelpers.js', function(req,res){
+	res.sendFile(__dirname + '/clientjs/clientHelpers.js');
 });
 
 

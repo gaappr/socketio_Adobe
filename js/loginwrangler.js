@@ -1,10 +1,12 @@
+var events = require('./events.js');
+
 module.exports = {
 
     checkLogin: function(userName) {
-        return userName === "Graham" ? true : false;
+        return userName === "Graham";
     },
 
     loginFailed: function(){
-        socket.emit('loginFailure', {} );
+        socket.emit(events.loginFailure, {} );
     }
 }

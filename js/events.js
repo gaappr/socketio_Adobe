@@ -7,6 +7,7 @@
 module.exports = {
 	connect : 'connect', //A connection event that is fired when socket.io is connected, a default
 	loginVerified : 'loginVerified', //An event that fires when a login has been succesfully verified
+	loginFailure : 'loginFailure', //An event that fires when a login has failed
 
 
 	/**

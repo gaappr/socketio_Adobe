@@ -1,32 +1,67 @@
+@import "bourbon/bourbon";
+@import "neat/neat";
+
 $bg:#225378;
 $color:#1695A3;
 $color2:#ACF0F2;
 $color3:#F3FFE2;
 $color4:#EB7F00;
 $fontStack: "Helvetica", "Arial", sans-serif;
+$defaultRadius:25px;
 
 body{
     margin:0px;
     padding:0px;
     background-color:$bg;
     font-family:$fontStack;
+    height:100%;
 }
 
 #wrapper{
-    background-color:$color3;
-    width:960px;
-    border-radius:25px;
-    margin: 0 auto;
-    margin-top:25px;
-    padding:25px;
+  @include outer-container;
+  background-color:$color3;
+  border-radius:$defaultRadius;
+  border:3px solid $color4;
+  padding:25px;
 }
 
 .stepDiv img{
-    max-width:150px;
+  @include column-width(12);
+  min-height:200px;
 }
 
 #feedback{
-    border-top:3px solid $color4;
-    min-height:100px;
+  @include column-width(12);
+  min-height:200px;
+  border-top:3px solid $color4;
 }
 
+#login{
+    position:relative;
+    top:50%;
+    transform: translateY(50%);
+    padding:25px;
+    width:300px;
+    height:200px;
+    background-color:$color3;
+    border-radius:$defaultRadius;
+    border:3px solid $color4;
+    margin:auto;
+
+  h2{
+    text-align:center;
+  }
+
+  button{
+    display:block;
+    width:150px;
+    margin:0 auto;
+    margin-top:10px;
+  }
+
+  input{
+    display:block;
+    width:200px;
+    margin:0 auto;
+  }
+}
