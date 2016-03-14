@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <title>Photoshop Learning Path</title>
     <link type="text/css" href="style.css" rel="stylesheet"/>
+    <script src="events.js"></script>
     <script src="socket.io.js"></script>
-    <script src="clientHelpers.js"></script>
 </head>
 <body>
     <div id="login">
-        <h2>Adobe Learning Paths</h2>
-        <input type="text" id="un" placeholder="Username"/>
-        <button onclick="drawStage()">Login</button>
+        <h2>Adobe Learning Path</h2>
+        <input type="text" id="un" placeholder="Username" autofocus="true"/>
+        <button id="loginBtn" onclick="drawStage()">Login</button>
     </div>
+    <script src="clientHelpers.js"></script>
 </body>
 </html>

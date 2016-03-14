@@ -1,4 +1,4 @@
-var events = require('./events.js');
+var events = require('lpevents');
 
 module.exports = {
 

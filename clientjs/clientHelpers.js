@@ -4,32 +4,30 @@
 
 var socket = io('http://localhost:1337');
 socket.on('connect', function(data){
-	console.log('here!')
-	console.log(data);
+
 });
 
-socket.on('pollForMode',
+socket.on(events.modeChange,
 	function(){
 		var endGame = createDiv();
 		appendMessage('Excellent! Note that the document is now in CMYK and has four color channels.', endGame);
 		document.getElementById('feedback').appendChild(endGame);
 	});
 
-socket.on('loginVerified', function (data) {
-	theButton = document.createElement('button');
-	theButton.appendChild(document.createTextNode('Begin Lesson 1') );
-	theButton.onclick = function(){ startPolling() };
-	document.getElementById('stage').appendChild(theButton);
+socket.on(events.loginVerified, function (data) {
+	drawStage();
+	startPolling();
 });
 
 function startPolling(){
-	socket.emit('beginPoll',{});
+	socket.emit(events.beginPoll,{});
 	lesson1();
 }
 
 function lesson1(){
 	clearStage();
 	var lesson = createDiv();
+	appendTitle('Changing the Mode', lesson);
 	appendImage("images/lesson1.png", lesson);
 	appendMessage('Change the color mode of the document to CMYK using the menu item indicated in the image.', lesson);
 	document.getElementById('stage').appendChild(lesson);
@@ -43,6 +41,13 @@ function createDiv(){
 
 function clearStage(){
 	document.getElementById('stage').innerHTML = "";
+}
+
+function appendTitle(title, divLocation){
+	var titleLoc = document.createElement('h1');
+	var titleText = document.createTextNode(title);
+	titleLoc.appendChild(titleText);
+	divLocation.appendChild(titleLoc);
 }
 
 function appendMessage( msg, divLocation ){
@@ -74,4 +79,13 @@ function drawStage(){
 	var login = document.getElementById('login');
 	body.removeChild(login);
 	body.appendChild(wrapper);
+}
+
+var loginButton = document.getElementById('loginBtn');
+loginButton.onclick = function() {
+	socket.emit(events.loginAttempt,
+		{
+			username: document.getElementById('un').value
+		}
+	)
 }

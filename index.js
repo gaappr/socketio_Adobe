@@ -1,5 +1,5 @@
-var loginWranger = require('./js/loginwrangler.js');
-var events = require('./js/events.js');
+var loginWrangler = require('./js/loginwrangler.js');
+var events = require('lpevents');
 var appAdobe = require('express')();
 var serverAdobe = require('http').Server(appAdobe);
 var ioAdobe = require('socket.io')(serverAdobe);
@@ -42,6 +42,10 @@ appBrowser.get('/clientHelpers.js', function(req,res){
 	res.sendFile(__dirname + '/clientjs/clientHelpers.js');
 });
 
+appBrowser.get('/events.js', function(req,res){
+	res.sendFile(__dirname + '/node_modules/lpevents/events.js');
+});
+
 
 /***********
 * Working with the events to/from Adobe
@@ -51,20 +55,20 @@ ioAdobe.on('connection', function (socket) {
     adobeSocket = socket;
     adobeSocket.emit(events.connect, { connection: 'adobe' });
     
-    adobeSocket.on('modeChanged',
+    adobeSocket.on(events.modeChange,
         function(data){
-            browserSocket.emit(events.pollForMode,{});
+            browserSocket.emit(events.modeChange,{});
         });
 
-    adobeSocket.on('loginAttempt',
+    adobeSocket.on(events.loginAttempt,
         function(data) {
-            if(loginWranger.checkLogin(data.username)){
-                console.log('username verified');
+            if(loginWrangler.checkLogin(data.username)){
+                console.log('Adobe username verified: ' + data.username);
                 adobeSocket.emit(events.loginVerified);
-                browserSocket.emit(events.loginVerified);
             }
             else{
-                console.log('login failed!');
+                console.log('Adobe login failed!');
+	            adobeSocket.emit(events.loginFailure);
             }
         });
 });
@@ -76,8 +80,19 @@ ioBrowser.on('connection',function(socket){
     console.log('Browser Connection')
     browserSocket = socket;
     browserSocket.emit(events.connect,{connection:'browser'});
-    browserSocket.on('beginPoll',
+
+	browserSocket.on(events.beginPoll,
         function(){
             ioAdobe.emit(events.beginPoll,{});
     });
+
+	browserSocket.on(events.loginAttempt, function(data){
+		if(loginWrangler.checkLogin(data.username)){
+			console.log('Browser username verified: ' + data.username);
+			browserSocket.emit(events.loginVerified);
+		}
+		else{
+			browserSocket.emit(events.loginFailure);
+		}
+	});
 });

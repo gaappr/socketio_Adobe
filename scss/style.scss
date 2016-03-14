@@ -1,20 +1,20 @@
 @import "bourbon/bourbon";
 @import "neat/neat";
 
-$bg:#225378;
-$color:#1695A3;
-$color2:#ACF0F2;
-$color3:#F3FFE2;
-$color4:#EB7F00;
-$fontStack: "Helvetica", "Arial", sans-serif;
+$bg:#000000;
+$color:#FFFFFF;
+$color2:#7E8AA2;
+$color3:#263248;
+$color4:#FF9800;
 $defaultRadius:25px;
 
 body{
     margin:0px;
     padding:0px;
     background-color:$bg;
-    font-family:$fontStack;
+    font-family:$helvetica;
     height:100%;
+    color:$color;
 }
 
 #wrapper{
@@ -23,30 +23,34 @@ body{
   border-radius:$defaultRadius;
   border:3px solid $color4;
   padding:25px;
+  margin-top:25px;
+
+  img{
+    height:150px;
+  }
 }
 
-.stepDiv img{
-  @include column-width(12);
+.stepDiv{
   min-height:200px;
+  @include span-columns(12);
 }
 
 #feedback{
-  @include column-width(12);
-  min-height:200px;
+  @include span-columns(12);
+  min-height:100px;
   border-top:3px solid $color4;
 }
 
 #login{
-    position:relative;
-    top:50%;
     transform: translateY(50%);
     padding:25px;
-    width:300px;
+    width:350px;
     height:200px;
     background-color:$color3;
     border-radius:$defaultRadius;
     border:3px solid $color4;
     margin:auto;
+    box-shadow: 10px 10px 29px 0px rgba(0,0,0,0.75);
 
   h2{
     text-align:center;
@@ -54,14 +58,29 @@ body{
 
   button{
     display:block;
-    width:150px;
+    width:200px;
     margin:0 auto;
     margin-top:10px;
+    background-image: linear-gradient(to bottom, $color2, #636D85);
+    border-radius: 25px;
+    border-color:rgba(0,0,0,0.0);
+    text-shadow: 1px 1px 3px #666666;
+    color: #ffffff;
+    padding: 10px 10px 10px 10px;
+    text-decoration: none;
+    font-weight:bold;
+  }
+
+  button:hover {
+    background: #3cb0fd;
+    background-image: linear-gradient(to bottom, #636D85, $color2);
+    text-decoration: none;
   }
 
   input{
     display:block;
     width:200px;
+    height:30px;
     margin:0 auto;
   }
 }

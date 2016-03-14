@@ -7,57 +7,79 @@ html {
 body {
   margin: 0px;
   padding: 0px;
-  background-color: #225378;
-  font-family: "Helvetica", "Arial", sans-serif;
-  height: 100%; }
+  background-color: #000000;
+  font-family: "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
+  height: 100%;
+  color: #FFFFFF; }
 
 #wrapper {
   max-width: 68em;
   margin-left: auto;
   margin-right: auto;
-  background-color: #F3FFE2;
+  background-color: #263248;
   border-radius: 25px;
-  border: 3px solid #EB7F00;
-  padding: 25px; }
+  border: 3px solid #FF9800;
+  padding: 25px;
+  margin-top: 25px; }
   #wrapper::after {
     clear: both;
     content: "";
     display: table; }
+  #wrapper img {
+    height: 150px; }
 
-.stepDiv img {
-  -webkit-column-width: 12;
-  -moz-column-width: 12;
-  column-width: 12;
-  min-height: 200px; }
+.stepDiv {
+  min-height: 200px;
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 100%; }
+  .stepDiv:last-child {
+    margin-right: 0; }
 
 #feedback {
-  -webkit-column-width: 12;
-  -moz-column-width: 12;
-  column-width: 12;
-  min-height: 200px;
-  border-top: 3px solid #EB7F00; }
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 100%;
+  min-height: 100px;
+  border-top: 3px solid #FF9800; }
+  #feedback:last-child {
+    margin-right: 0; }
 
 #login {
-  position: relative;
-  top: 50%;
   transform: translateY(50%);
   padding: 25px;
-  width: 300px;
+  width: 350px;
   height: 200px;
-  background-color: #F3FFE2;
+  background-color: #263248;
   border-radius: 25px;
-  border: 3px solid #EB7F00;
-  margin: auto; }
+  border: 3px solid #FF9800;
+  margin: auto;
+  box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.75); }
   #login h2 {
     text-align: center; }
   #login button {
     display: block;
-    width: 150px;
+    width: 200px;
     margin: 0 auto;
-    margin-top: 10px; }
+    margin-top: 10px;
+    background-image: linear-gradient(to bottom, #7E8AA2, #636D85);
+    border-radius: 25px;
+    border-color: transparent;
+    text-shadow: 1px 1px 3px #666666;
+    color: #ffffff;
+    padding: 10px 10px 10px 10px;
+    text-decoration: none;
+    font-weight: bold; }
+  #login button:hover {
+    background: #3cb0fd;
+    background-image: linear-gradient(to bottom, #636D85, #7E8AA2);
+    text-decoration: none; }
   #login input {
     display: block;
     width: 200px;
+    height: 30px;
     margin: 0 auto; }
 
 /*# sourceMappingURL=style.css.map */
